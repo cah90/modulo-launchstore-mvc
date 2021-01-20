@@ -13,7 +13,7 @@ const Products = {
     return results.rows
   },
 
-  search(params) {
+  async search(params) {
     const {filter, category} = params
 
     let query = "",
@@ -38,7 +38,9 @@ const Products = {
       LEFT JOIN categories ON (categories.id = products.category_id)
       ${filterQuery}
       `
-      return db.query(query)
+      const results = await db.query(query)
+      return results.rows
+
   }
 
 }
